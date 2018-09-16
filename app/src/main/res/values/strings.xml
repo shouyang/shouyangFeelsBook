@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">shouyang-FeelsBook</string>
+
+
+    <string name="activity_create_feeling_label">Record A New Feeling: </string>
+
+
+    <string name="activity_create_feeling_user_date_hint">YYYY-MM-DD</string>
+    <string name="activity_create_feeling_user_time_hint">HH:MM (24 Hour)</string>
+    <string name="activity_create_feeling_user_comment_hint">Comment (Optional)</string>
+
+
+    <string name="emote_love">Love</string>
+    <string name="emote_joy">Joyful</string>
+    <string name="emote_suprise">Suprise</string>
+    <string name="emote_anger">Angry</string>
+    <string name="emote_sadness">Sad</string>
+    <string name="emote_fear">Fear</string>
+
+</resources>
