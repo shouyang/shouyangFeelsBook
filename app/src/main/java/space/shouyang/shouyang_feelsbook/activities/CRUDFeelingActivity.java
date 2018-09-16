@@ -52,13 +52,6 @@ public abstract class CRUDFeelingActivity extends AppCompatActivity {
         this.updateDatetimeForms();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-
-
     public void updateDatetimeForms() {
         Date now = Calendar.getInstance().getTime();
 
@@ -122,7 +115,7 @@ public abstract class CRUDFeelingActivity extends AppCompatActivity {
         this.input_comment = findViewById(R.id.user_comment);
     }
 
-    private void initArrayData() {
+    protected void initArrayData() {
 
         try {
 
@@ -156,7 +149,7 @@ public abstract class CRUDFeelingActivity extends AppCompatActivity {
     }
 
 
-    private void saveArrayDate() {
+    protected void saveArrayDate() {
         try {
             File records_file = new File(getApplicationContext().getFilesDir(), this.save_path);
             if (!records_file.exists()) {

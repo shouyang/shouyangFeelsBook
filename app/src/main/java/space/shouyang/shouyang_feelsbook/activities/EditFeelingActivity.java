@@ -29,23 +29,10 @@ import space.shouyang.shouyang_feelsbook.R;
 import space.shouyang.shouyang_feelsbook.models.Feel;
 import space.shouyang.shouyang_feelsbook.models.FeelingRecord;
 
-public class EditFeelingActivity extends AppCompatActivity {
+public class EditFeelingActivity extends CRUDFeelingActivity {
 
-    String save_path = "Feels.json";
-
-    List<FeelingRecord> records;
-
-    EditText input_date;
-    EditText input_time;
-    EditText input_comment;
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_crud_feeling);
-
-        this.initInputFields();
-        this.initArrayData();
 
         Button delete_button  = findViewById(R.id.submit_delete);
         delete_button.setVisibility(View.VISIBLE);
@@ -54,26 +41,19 @@ public class EditFeelingActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 deleteFeelingRecord(v);
-
-
             }
             });
-
-
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        this.updateDatetimeForms();
 
         Bundle bundle = this.getIntent().getExtras();
         if (bundle != null) {
             this.initArrayData();
             this.refreshInputFieldsFromRecords(bundle.getInt("pos"));
         }
-
     }
 
     private void refreshInputFieldsFromRecords(int pos) {
@@ -83,7 +63,7 @@ public class EditFeelingActivity extends AppCompatActivity {
 
         Date record_date  = record.getRecord_time();
 
-        String formatted_date = new SimpleDateFormat("yyyy-mm-dd").format(record_date);
+        String formatted_date = new SimpleDateFormat("yyyy-MM-dd").format(record_date);
         String formatted_time = new SimpleDateFormat("HH:mm:ss").format(record_date);
 
 
@@ -127,22 +107,6 @@ public class EditFeelingActivity extends AppCompatActivity {
                 break;
         }
     }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-
-
-    public void updateDatetimeForms() {
-        Date now = Calendar.getInstance().getTime();
-
-        this.input_date.setText(new SimpleDateFormat("yyyy-MM-dd").format(now));
-        this.input_time.setText(new SimpleDateFormat("HH:mm:ss").format(now));
-    }
-
 
     public void deleteFeelingRecord(View view) {
         Bundle bundle = this.getIntent().getExtras();
@@ -215,80 +179,4 @@ public class EditFeelingActivity extends AppCompatActivity {
     public void submitSupriseRecord(View view) {
         updateFeelingRecord(Feel.SURPRISE);
     }
-
-
-    public void showFeelingListActivity() {
-        Intent intent = new Intent(this, ListFeelingsActivity.class);
-        startActivity(intent);
-    }
-
-    public void showFeelingListActivity(View view) {
-        Intent intent = new Intent(this, ListFeelingsActivity.class);
-        startActivity(intent);
-    }
-
-
-    private void initInputFields() {
-        this.input_date = findViewById(R.id.user_date);
-        this.input_time = findViewById(R.id.user_time);
-        this.input_comment = findViewById(R.id.user_comment);
-    }
-
-    private void initArrayData() {
-
-        try {
-
-            File records_file = new File(getApplicationContext().getFilesDir(), this.save_path);
-            if (!records_file.exists()) {
-                records_file.createNewFile();
-            }
-            else {
-                FileReader reader = new FileReader(records_file);
-
-                Gson gson = new Gson();
-                FeelingRecord records[];
-                records = gson.fromJson(reader, FeelingRecord[].class );
-
-
-                if (records != null) {
-                    this.records = new Vector(Arrays.asList(records));
-                    Collections.sort(this.records, Collections.reverseOrder());
-                }
-
-                else {
-                    this.records = new Vector<>();
-                }
-
-                reader.close();
-            }
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-
-    private void saveArrayDate() {
-        try {
-            File records_file = new File(getApplicationContext().getFilesDir(), this.save_path);
-            if (!records_file.exists()) {
-                records_file.createNewFile();
-            }
-
-            FileWriter writer = new FileWriter(records_file, false);
-
-            Gson gson = new Gson();
-
-            writer.write(gson.toJson(this.records.toArray()).toString());
-            writer.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-    }
-
-
 }
