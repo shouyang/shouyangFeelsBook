@@ -1,29 +1,15 @@
 package space.shouyang.shouyang_feelsbook.activities;
 
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
-import java.util.Vector;
 
 import space.shouyang.shouyang_feelsbook.R;
 import space.shouyang.shouyang_feelsbook.models.Feel;
@@ -37,9 +23,7 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
         Button delete_button  = findViewById(R.id.submit_delete);
         delete_button.setVisibility(View.VISIBLE);
         delete_button.setOnClickListener( new View.OnClickListener() {
-
             public void onClick(View v) {
-
                 deleteFeelingRecord(v);
             }
             });

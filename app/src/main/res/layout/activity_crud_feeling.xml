@@ -91,7 +91,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/activity_create_feeling_label"
+        android:text="@string/activity_crud_feeling_label"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +108,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:ems="10"
-        android:hint="@string/activity_create_feeling_user_comment_hint"
+        android:hint="@string/activity_crud_feeling_user_comment_hint"
         android:inputType="textMultiLine"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/submit_fear"
@@ -125,10 +125,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/activity_create_feeling_user_date_hint"
+        android:hint="@string/activity_crud_feeling_user_date_hint"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/user_date_label" />
 
 
     <EditText
@@ -139,43 +139,43 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/activity_create_feeling_user_time_hint"
+        android:hint="@string/activity_crud_feeling_user_time_hint"
         android:inputType="time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/user_time_label" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/user_time_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Time (HH:MM):"
+        android:text="@string/activity_crud_feeling_user_time_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_date" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/user_date_label"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Date (YYYY-MM-DD):"
+        android:text="@string/activity_crud_feeling_user_date_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:onClick="showFeelingListActivity"
-
         android:id="@+id/showHistory"
+
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginTop="32dp"
-        android:text="History"
+        android:onClick="showFeelingListActivity"
+        android:text="@string/activity_crud_feeling_history_label"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -188,7 +188,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginTop="84dp"
-        android:text="Delete"
+        android:text="@string/activity_crud_feeling_delete_label"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/showHistory" />

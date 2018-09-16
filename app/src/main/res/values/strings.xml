@@ -2,12 +2,21 @@
     <string name="app_name">shouyang-FeelsBook</string>
 
 
-    <string name="activity_create_feeling_label">Record A New Feeling: </string>
+
+    <string name="activity_crud_feeling_label">Record A New Feeling: </string>
 
 
-    <string name="activity_create_feeling_user_date_hint">YYYY-MM-DD</string>
-    <string name="activity_create_feeling_user_time_hint">HH:MM (24 Hour)</string>
-    <string name="activity_create_feeling_user_comment_hint">Comment (Optional)</string>
+    <string name="activity_crud_feeling_user_date_label">Date (YYYY-MM-DD):</string>
+    <string name="activity_crud_feeling_user_time_label">Time (HH:MM):</string>
+
+    <string name="activity_crud_feeling_delete_label">Delete</string>
+    <string name="activity_crud_feeling_history_label">History</string>
+
+
+
+    <string name="activity_crud_feeling_user_date_hint">YYYY-MM-DD</string>
+    <string name="activity_crud_feeling_user_time_hint">HH:MM (24 Hour)</string>
+    <string name="activity_crud_feeling_user_comment_hint">Comment (Optional)</string>
 
 
     <string name="emote_love">Love</string>
