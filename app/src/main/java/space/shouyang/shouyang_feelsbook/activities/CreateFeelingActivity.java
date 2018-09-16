@@ -29,14 +29,6 @@ import space.shouyang.shouyang_feelsbook.models.FeelingRecord;
 
 public class CreateFeelingActivity extends CRUDFeelingActivity {
 
-    String save_path = "Feels.json";
-
-    List<FeelingRecord> records;
-
-    EditText input_date;
-    EditText input_time;
-    EditText input_comment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,27 +85,27 @@ public class CreateFeelingActivity extends CRUDFeelingActivity {
         }
     }
 
-    public void createAngerRecord(View view) {
+    public void submitAngerRecord(View view) {
         createFeelingRecord(Feel.ANGER);
     }
 
-    public void createFearRecord(View view) {
+    public void submitFearRecord(View view) {
         createFeelingRecord(Feel.FEAR);
     }
 
-    public void createJoyFulRecord(View view) {
+    public void submitJoyFulRecord(View view) {
         createFeelingRecord(Feel.JOY);
     }
 
-    public void createLoveRecord(View view) {
+    public void submitLoveRecord(View view) {
         createFeelingRecord(Feel.LOVE);
     }
 
-    public void createSadRecord(View view) {
+    public void submitSadRecord(View view) {
         createFeelingRecord(Feel.SADNESS);
     }
 
-    public void createSupriseRecord(View view) {
+    public void submitSupriseRecord(View view) {
         createFeelingRecord(Feel.SURPRISE);
     }
 

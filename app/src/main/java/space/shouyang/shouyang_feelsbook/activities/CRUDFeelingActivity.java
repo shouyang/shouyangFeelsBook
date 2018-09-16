@@ -62,7 +62,7 @@ public abstract class CRUDFeelingActivity extends AppCompatActivity {
     public void updateDatetimeForms() {
         Date now = Calendar.getInstance().getTime();
 
-        this.input_date.setText(new SimpleDateFormat("yyyy-mm-dd").format(now));
+        this.input_date.setText(new SimpleDateFormat("yyyy-MM-dd").format(now));
         this.input_time.setText(new SimpleDateFormat("HH:mm:ss").format(now));
     }
 
@@ -93,29 +93,17 @@ public abstract class CRUDFeelingActivity extends AppCompatActivity {
         }
     }
 
-    public void createAngerRecord(View view) {
-        createFeelingRecord(Feel.ANGER);
-    }
+    public abstract void submitAngerRecord(View view);
 
-    public void createFearRecord(View view) {
-        createFeelingRecord(Feel.FEAR);
-    }
+    public abstract void submitFearRecord(View view);
 
-    public void createJoyFulRecord(View view) {
-        createFeelingRecord(Feel.JOY);
-    }
+    public abstract void submitJoyFulRecord(View view);
 
-    public void createLoveRecord(View view) {
-        createFeelingRecord(Feel.LOVE);
-    }
+    public abstract void submitLoveRecord(View view);
 
-    public void createSadRecord(View view) {
-        createFeelingRecord(Feel.SADNESS);
-    }
+    public abstract void submitSadRecord(View view);
 
-    public void createSupriseRecord(View view) {
-        createFeelingRecord(Feel.SURPRISE);
-    }
+    public abstract void submitSupriseRecord(View view);
 
 
     public void showFeelingListActivity() {

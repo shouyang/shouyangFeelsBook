@@ -192,27 +192,27 @@ public class EditFeelingActivity extends AppCompatActivity {
         }
     }
 
-    public void createAngerRecord(View view) {
+    public void submitAngerRecord(View view) {
         updateFeelingRecord(Feel.ANGER);
     }
 
-    public void createFearRecord(View view) {
+    public void submitFearRecord(View view) {
         updateFeelingRecord(Feel.FEAR);
     }
 
-    public void createJoyFulRecord(View view) {
+    public void submitJoyFulRecord(View view) {
         updateFeelingRecord(Feel.JOY);
     }
 
-    public void createLoveRecord(View view) {
+    public void submitLoveRecord(View view) {
         updateFeelingRecord(Feel.LOVE);
     }
 
-    public void createSadRecord(View view) {
+    public void submitSadRecord(View view) {
         updateFeelingRecord(Feel.SADNESS);
     }
 
-    public void createSupriseRecord(View view) {
+    public void submitSupriseRecord(View view) {
         updateFeelingRecord(Feel.SURPRISE);
     }
 

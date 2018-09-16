@@ -8,7 +8,7 @@
     tools:layout_editor_absoluteY="81dp">
 
     <Button
-        android:onClick="createAngerRecord"
+        android:onClick="submitAngerRecord"
 
         android:id="@+id/submit_angry"
         android:layout_width="110dp"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:onClick="createFearRecord"
+        android:onClick="submitFearRecord"
 
         android:id="@+id/submit_fear"
         android:layout_width="110dp"
@@ -33,7 +33,7 @@
         app:layout_constraintStart_toEndOf="@+id/submit_angry" />
 
     <Button
-        android:onClick="createJoyFulRecord"
+        android:onClick="submitJoyFulRecord"
 
         android:id="@+id/submit_joyful"
         android:layout_width="110dp"
@@ -45,7 +45,7 @@
         app:layout_constraintStart_toEndOf="@+id/submit_fear" />
 
     <Button
-        android:onClick="createLoveRecord"
+        android:onClick="submitLoveRecord"
 
         android:id="@+id/submit_love"
         android:layout_width="110dp"
@@ -59,7 +59,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:onClick="createSadRecord"
+        android:onClick="submitSadRecord"
 
         android:id="@+id/submit_sad"
         android:layout_width="110dp"
@@ -72,7 +72,7 @@
         app:layout_constraintStart_toEndOf="@+id/submit_love" />
 
     <Button
-        android:onClick="createSupriseRecord"
+        android:onClick="submitSupriseRecord"
 
         android:id="@+id/submit_suprised"
         android:layout_width="110dp"
