@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import space.shouyang.shouyang_feelsbook.R;
 import space.shouyang.shouyang_feelsbook.models.Feel;
@@ -47,14 +48,14 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
 
         Date record_date  = record.getRecord_time();
 
-        String formatted_date = new SimpleDateFormat("yyyy-MM-dd").format(record_date);
-        String formatted_time = new SimpleDateFormat("HH:mm:ss").format(record_date);
+        String formatted_date = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(record_date);
+        String formatted_time = new SimpleDateFormat("HH:mm:ss", Locale.US).format(record_date);
 
 
 
         this.input_date.setText(formatted_date);
         this.input_time.setText(formatted_time);
-        this.input_comment.setText(record.getComment().toString());
+        this.input_comment.setText(record.getComment());
 
         Button button;
         switch (record.getFeeling())
@@ -117,7 +118,7 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
 
     public void createFeelingRecord(Feel feel) {
 
-        DateFormat dateBuilder = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
+        DateFormat dateBuilder = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss", Locale.US);
         Date datetime;
 
 
