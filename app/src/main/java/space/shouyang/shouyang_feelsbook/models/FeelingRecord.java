@@ -20,7 +20,7 @@ public class FeelingRecord implements Comparable<FeelingRecord> {
 
     @Override
     public String toString() {
-        return String.format("(%s), %s", new SimpleDateFormat("MM/dd/yyyy hh:mm:ss").format(this.record_time), this.feeling);
+        return String.format("(%s), %s", new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa").format(this.record_time), this.feeling);
     }
 
     @Override

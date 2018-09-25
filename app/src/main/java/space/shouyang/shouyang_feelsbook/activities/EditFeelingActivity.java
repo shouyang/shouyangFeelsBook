@@ -49,7 +49,7 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
         Date record_date  = record.getRecord_time();
 
         String formatted_date = new SimpleDateFormat("yyyy-MM-dd").format(record_date);
-        String formatted_time = new SimpleDateFormat("HH:mm:ss").format(record_date);
+        String formatted_time = new SimpleDateFormat("hh:mm:ss aa").format(record_date);
 
 
 
@@ -117,7 +117,7 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
 
     public void createFeelingRecord(Feel feel) {
 
-        DateFormat dateBuilder = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
+        DateFormat dateBuilder = new SimpleDateFormat("yyyy-MM-ddhh:mm:ss aa");
         Date datetime;
 
 

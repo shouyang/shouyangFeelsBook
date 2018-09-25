@@ -57,14 +57,14 @@ public abstract class CRUDFeelingActivity extends AppCompatActivity {
         Date now = Calendar.getInstance().getTime();
 
         this.input_date.setText(new SimpleDateFormat("yyyy-MM-dd").format(now));
-        this.input_time.setText(new SimpleDateFormat("HH:mm:ss").format(now));
+        this.input_time.setText(new SimpleDateFormat("hh:mm:ss aa").format(now));
     }
 
 
 
     public void createFeelingRecord(Feel feel) {
 
-        DateFormat dateBuilder = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
+        DateFormat dateBuilder = new SimpleDateFormat("yyyy-MM-ddhh:mm:ss aa");
         Date datetime;
 
 
