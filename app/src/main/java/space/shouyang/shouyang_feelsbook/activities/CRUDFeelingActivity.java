@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Vector;
 
 import space.shouyang.shouyang_feelsbook.R;
+import space.shouyang.shouyang_feelsbook.exceptions.CommentTooLongException;
 import space.shouyang.shouyang_feelsbook.models.Feel;
 import space.shouyang.shouyang_feelsbook.models.FeelingRecord;
 
@@ -84,6 +85,10 @@ public abstract class CRUDFeelingActivity extends AppCompatActivity {
         }
         catch (ParseException e) {
             Toast.makeText(this, "Invalid Input ... Try Again (Check Date Input)", Toast.LENGTH_SHORT).show();
+        }
+
+        catch (CommentTooLongException e) {
+            Toast.makeText(this, "Invalid Input ... Comment Over 100 Chars ", Toast.LENGTH_SHORT).show();
         }
     }
 

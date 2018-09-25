@@ -5,13 +5,21 @@ import android.support.annotation.NonNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import space.shouyang.shouyang_feelsbook.exceptions.CommentTooLongException;
+
 public class FeelingRecord implements Comparable<FeelingRecord> {
+    private static  int MAX_COMMENT_LENGTH = 100;
+
 
     private Feel feeling;
     private String comment;
     private Date   record_time;
 
-    public FeelingRecord (Feel feeling, String comment, Date datetime) {
+    public FeelingRecord (Feel feeling, String comment, Date datetime) throws  CommentTooLongException {
+
+        if (comment.length() > MAX_COMMENT_LENGTH) {
+            throw new CommentTooLongException();
+        }
 
         this.comment = comment;
         this.feeling = feeling;
@@ -40,7 +48,11 @@ public class FeelingRecord implements Comparable<FeelingRecord> {
         return record_time;
     }
 
-    public void setComment(String comment) {
+    public void setComment(String comment) throws CommentTooLongException{
+        if (comment.length() > MAX_COMMENT_LENGTH) {
+            throw new CommentTooLongException();
+        }
+
         this.comment = comment;
     }
 

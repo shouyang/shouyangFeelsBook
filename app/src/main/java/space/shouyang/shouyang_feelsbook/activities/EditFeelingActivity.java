@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import space.shouyang.shouyang_feelsbook.R;
+import space.shouyang.shouyang_feelsbook.exceptions.CommentTooLongException;
 import space.shouyang.shouyang_feelsbook.models.Feel;
 import space.shouyang.shouyang_feelsbook.models.FeelingRecord;
 
@@ -138,6 +139,11 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
         catch (ParseException e) {
             Toast.makeText(this, "Invalid Input ... Try Again (Check Date Input)", Toast.LENGTH_SHORT).show();
         }
+
+        catch (CommentTooLongException e) {
+            Toast.makeText(this, "Invalid Input ... Comment Over 100 Chars ", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void submitAngerRecord(View view) {
