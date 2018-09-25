@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -120,28 +121,36 @@ public abstract class CRUDFeelingActivity extends AppCompatActivity {
         try {
 
             File records_file = new File(getApplicationContext().getFilesDir(), this.save_path);
+
             if (!records_file.exists()) {
                 records_file.createNewFile();
+                this.records = new Vector<>();
             }
+
+
             else {
                 FileReader reader = new FileReader(records_file);
-
                 Gson gson = new Gson();
+
+
                 FeelingRecord records[];
                 records = gson.fromJson(reader, FeelingRecord[].class );
 
 
                 if (records != null) {
                     this.records = new Vector(Arrays.asList(records));
+                    Collections.sort(this.records, Collections.reverseOrder());
                 }
 
                 else {
                     this.records = new Vector<>();
                 }
-
                 reader.close();
             }
+
         }
+
+
         catch (IOException e)
         {
             e.printStackTrace();

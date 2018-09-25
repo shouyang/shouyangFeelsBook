@@ -48,8 +48,8 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
 
         Date record_date  = record.getRecord_time();
 
-        String formatted_date = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(record_date);
-        String formatted_time = new SimpleDateFormat("HH:mm:ss", Locale.US).format(record_date);
+        String formatted_date = new SimpleDateFormat("yyyy-MM-dd").format(record_date);
+        String formatted_time = new SimpleDateFormat("HH:mm:ss").format(record_date);
 
 
 
@@ -60,7 +60,6 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
         Button button;
         switch (record.getFeeling())
         {
-
             case ANGER:
                 button = findViewById(R.id.submit_angry);
                 button.setTypeface(button.getTypeface(), Typeface.BOLD);
@@ -118,7 +117,7 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
 
     public void createFeelingRecord(Feel feel) {
 
-        DateFormat dateBuilder = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss", Locale.US);
+        DateFormat dateBuilder = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
         Date datetime;
 
 
