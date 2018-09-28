@@ -27,16 +27,26 @@ import space.shouyang.shouyang_feelsbook.R;
 import space.shouyang.shouyang_feelsbook.models.Feel;
 import space.shouyang.shouyang_feelsbook.models.FeelingRecord;
 
-public class ListFeelingsActivity extends AppCompatActivity {
 
-    String save_path = "Feels.json";
 
-    List<FeelingRecord> records;
 
+/**
+ *  Purpose:
+ *      Display a list of persisted feeling records.
+ *      Displays a count of the type of feeling records present.
+ *
+ *  Design Rationale:
+ *      Use list view to display records persisted. Do this on a separate activity for more space.
+ *      Allow the user to select a record for editing. Display counts as complementary item to
+ *      the list of records presented.
+ *
+ *      Extends PersistentFeelingRecordsActivity to reuse how data is saved and loaded from
+ *      internal storage.
+ */
+public class ListFeelingsActivity extends PersistentFeelingRecordsActivity {
 
     ListAdapter recordsAdapter;
     ListView form;
-
 
     TextView angry_count;
     TextView fear_count;
@@ -45,6 +55,10 @@ public class ListFeelingsActivity extends AppCompatActivity {
     TextView sad_count;
     TextView suprise_count;
 
+
+    /**
+     *  Bind UI and update counts from loaded records.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +68,9 @@ public class ListFeelingsActivity extends AppCompatActivity {
         this.initCounts();
     }
 
+    /**
+     *  Update counts for any updates to loaded records.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -61,14 +78,17 @@ public class ListFeelingsActivity extends AppCompatActivity {
         this.updateCounts();
     }
 
+
+    /**
+     *  Binds the records adapter from to the list view.
+     */
     private void initForms() {
-        this.updateDataArray();
+        this.initArrayData();
 
         this.recordsAdapter = new ArrayAdapter<FeelingRecord>(this, R.layout.list_feeling, this.records);
 
         this.form = findViewById(R.id.feelings_log);
         this.form.setAdapter(this.recordsAdapter);
-
 
         this.form.setOnItemClickListener( new AdapterView.OnItemClickListener()
         {
@@ -82,10 +102,11 @@ public class ListFeelingsActivity extends AppCompatActivity {
             }
         }
         );
-
-
     }
 
+    /**
+     *  Binds the UI fields used to store the different counts of emotions.
+     */
     private void initCounts() {
         this.angry_count = findViewById(R.id.anger_count);
         this.fear_count = findViewById(R.id.fear_count);
@@ -97,26 +118,9 @@ public class ListFeelingsActivity extends AppCompatActivity {
         this.updateCounts();
     }
 
-    private void updateDataArray() {
-        try {
-            File records_file = new File(getApplicationContext().getFilesDir(), this.save_path);
-            if (!records_file.exists()) {records_file.createNewFile();}
-            else {
-                FileReader reader = new FileReader(records_file);
-                FeelingRecord records[] = new Gson().fromJson(reader, FeelingRecord[].class);
-
-                if (records != null) {
-                    this.records = new Vector(Arrays.asList(records));
-                    Collections.sort(this.records, Collections.reverseOrder());
-                }
-                else {this.records = new Vector<>();}
-
-                reader.close();
-            }
-        }
-        catch (IOException e) {e.printStackTrace();}
-    }
-
+    /**
+     *  Updates the counts of different emotions.
+     */
     private void updateCounts() {
 
         Map<Feel, Integer> counts_of = new HashMap<>();

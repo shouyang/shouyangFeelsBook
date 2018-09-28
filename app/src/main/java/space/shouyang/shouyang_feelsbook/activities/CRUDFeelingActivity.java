@@ -1,73 +1,73 @@
 package space.shouyang.shouyang_feelsbook.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
-import com.google.gson.Gson;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
-import java.util.Vector;
 
 import space.shouyang.shouyang_feelsbook.R;
 import space.shouyang.shouyang_feelsbook.exceptions.CommentTooLongException;
 import space.shouyang.shouyang_feelsbook.models.Feel;
 import space.shouyang.shouyang_feelsbook.models.FeelingRecord;
 
-public abstract class CRUDFeelingActivity extends AppCompatActivity {
-
-    String save_path = "Feels.json";
-
-    List<FeelingRecord> records;
+/**
+ *  Purpose:
+ *      Base class for activities that require create, read, update, delete functionality
+ *      related to a single Feeling object.
+ *
+ *  Design Rationale:
+ *      Reuse and make consistent how common model persistent model functions are implemented.
+ *      CRUD functionality interrelate and share common functionality. CRUD views should be
+ *      slices of the functionality CRUD activity.
+ *
+ *      Some use cases:
+ *          * Discriminate user permissions and supply differing CRUD views
+ *          * Supply differing CRUD GUIs with consistent backend.
+ *
+ *      Provides abstract methods tied to UI buttons to be defined by concrete CRUD activities.
+ *      For create and edit activities to share buttons.
+ *
+ */
+public abstract class CRUDFeelingActivity extends PersistentFeelingRecordsActivity {
 
     EditText input_date;
     EditText input_time;
     EditText input_comment;
 
+    /**
+     *  Binds the UI for FeelingRecords CRUD activities on create.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_crud_feeling);
-
         this.initInputFields();
-        this.initArrayData();
     }
 
+    /**
+     * Update UI datetime fields whenever user resumes CRUD activities.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         this.updateDatetimeForms();
     }
 
-    public void updateDatetimeForms() {
-        Date now = Calendar.getInstance().getTime();
-
-        this.input_date.setText(new SimpleDateFormat("yyyy-MM-dd").format(now));
-        this.input_time.setText(new SimpleDateFormat("hh:mm:ss aa").format(now));
-    }
-
-
-
+    /**
+     * Creates new feeling record and store to persistent data array.
+     * Moves user to list feeling activity so they may look at their new record.
+     * @param feel new feeling type
+     */
     public void createFeelingRecord(Feel feel) {
-
         DateFormat dateBuilder = new SimpleDateFormat("yyyy-MM-ddhh:mm:ss aa");
         Date datetime;
-
 
         String user_date = input_date.getText().toString();
         String user_time = input_time.getText().toString();
@@ -78,7 +78,7 @@ public abstract class CRUDFeelingActivity extends AppCompatActivity {
             FeelingRecord record = new FeelingRecord(feel, user_comment, datetime);
 
             this.records.add(record);
-            this.saveArrayDate();
+            this.saveArrayData();
 
 
             this.showFeelingListActivity();
@@ -86,9 +86,42 @@ public abstract class CRUDFeelingActivity extends AppCompatActivity {
         catch (ParseException e) {
             Toast.makeText(this, "Invalid Input ... Try Again (Check Date Input)", Toast.LENGTH_SHORT).show();
         }
-
         catch (CommentTooLongException e) {
             Toast.makeText(this, "Invalid Input ... Comment Over 100 Chars ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     *  Deletes a feeling record via its location in the records array.
+     *
+     *  For read, update, delete views wherein a position in the records array will be passed.
+     */
+    public void deleteFeelingRecord(View view) {
+        Bundle bundle = this.getIntent().getExtras();
+
+        if (bundle != null) {
+            this.records.remove(bundle.getInt("pos"));
+            this.saveArrayData();
+            this.showFeelingListActivity();
+        }
+    }
+
+
+    /**
+     *  Updates a feeling record in the records array via creating a new record and deleting the
+     *  existing one.
+     *
+     *  For read, update, delete views wherein a position in the records array will be passed.
+     */
+    public void updateFeelingRecord(Feel feel) {
+        Bundle bundle = this.getIntent().getExtras();
+
+        if (bundle != null) {
+            this.records.remove(bundle.getInt("pos"));
+            this.createFeelingRecord(feel);
+        }
+        else {
+            createFeelingRecord(feel);
         }
     }
 
@@ -121,67 +154,10 @@ public abstract class CRUDFeelingActivity extends AppCompatActivity {
         this.input_comment = findViewById(R.id.user_comment);
     }
 
-    protected void initArrayData() {
+    public void updateDatetimeForms() {
+        Date now = Calendar.getInstance().getTime();
 
-        try {
-
-            File records_file = new File(getApplicationContext().getFilesDir(), this.save_path);
-
-            if (!records_file.exists()) {
-                records_file.createNewFile();
-                this.records = new Vector<>();
-            }
-
-
-            else {
-                FileReader reader = new FileReader(records_file);
-                Gson gson = new Gson();
-
-
-                FeelingRecord records[];
-                records = gson.fromJson(reader, FeelingRecord[].class );
-
-
-                if (records != null) {
-                    this.records = new Vector(Arrays.asList(records));
-                    Collections.sort(this.records, Collections.reverseOrder());
-                }
-
-                else {
-                    this.records = new Vector<>();
-                }
-                reader.close();
-            }
-
-        }
-
-
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        this.input_date.setText(new SimpleDateFormat("yyyy-MM-dd").format(now));
+        this.input_time.setText(new SimpleDateFormat("hh:mm:ss aa").format(now));
     }
-
-
-    protected void saveArrayDate() {
-        try {
-            File records_file = new File(getApplicationContext().getFilesDir(), this.save_path);
-            if (!records_file.exists()) {
-                records_file.createNewFile();
-            }
-
-            FileWriter writer = new FileWriter(records_file, false);
-
-            Gson gson = new Gson();
-
-            writer.write(gson.toJson(this.records.toArray()).toString());
-            writer.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-    }
-
 }

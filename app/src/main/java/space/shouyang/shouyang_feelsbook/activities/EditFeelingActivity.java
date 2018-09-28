@@ -5,20 +5,32 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import android.widget.Toast;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import space.shouyang.shouyang_feelsbook.R;
-import space.shouyang.shouyang_feelsbook.exceptions.CommentTooLongException;
 import space.shouyang.shouyang_feelsbook.models.Feel;
 import space.shouyang.shouyang_feelsbook.models.FeelingRecord;
 
+
+/**
+ *  Purpose:
+ *      Activity for user to edit or delete existing feeling activities.
+ *      Previous activity should have supplied the index of the target feeling record to modify.
+ *
+ *  Design Rationale:
+ *      Reuse implementations supplied by CRUD super class. Adds functionality specific for
+ *      editing and deleting. In this case populate generic feeling record detail view with
+ *      data stored about a single feel record instance. Makes the delete button visible.
+ *
+ */
 public class EditFeelingActivity extends CRUDFeelingActivity {
 
+
+    /**
+     *  On create, make delete button visible from CRUD activity common UI which is generally
+     *  hidden.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -28,9 +40,13 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
             public void onClick(View v) {
                 deleteFeelingRecord(v);
             }
-            });
+        });
     }
 
+
+    /**
+     *  Ensure that on resume we update and populate UI based on selected feeling record.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -42,6 +58,10 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
         }
     }
 
+    /**
+     *  Populate generic CRUD activity input and text fields with data related to the target
+     *  feeling record instance.
+     */
     private void refreshInputFieldsFromRecords(int pos) {
 
         FeelingRecord record = this.records.get(pos);
@@ -51,8 +71,6 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
 
         String formatted_date = new SimpleDateFormat("yyyy-MM-dd").format(record_date);
         String formatted_time = new SimpleDateFormat("hh:mm:ss aa").format(record_date);
-
-
 
         this.input_date.setText(formatted_date);
         this.input_time.setText(formatted_time);
@@ -91,59 +109,6 @@ public class EditFeelingActivity extends CRUDFeelingActivity {
                 button.setTypeface(button.getTypeface(), Typeface.BOLD);
                 break;
         }
-    }
-
-    public void deleteFeelingRecord(View view) {
-        Bundle bundle = this.getIntent().getExtras();
-
-        if (bundle != null) {
-            this.records.remove(bundle.getInt("pos"));
-            this.saveArrayDate();
-            this.showFeelingListActivity();
-        }
-    }
-
-    public void updateFeelingRecord(Feel feel) {
-        Bundle bundle = this.getIntent().getExtras();
-
-        if (bundle != null) {
-            this.records.remove(bundle.getInt("pos"));
-            this.createFeelingRecord(feel);
-        }
-        else {
-            createFeelingRecord(feel);
-        }
-    }
-
-
-    public void createFeelingRecord(Feel feel) {
-
-        DateFormat dateBuilder = new SimpleDateFormat("yyyy-MM-ddhh:mm:ss aa");
-        Date datetime;
-
-
-        String user_date = input_date.getText().toString();
-        String user_time = input_time.getText().toString();
-        String user_comment = input_comment.getText().toString();
-
-        try {
-            datetime = dateBuilder.parse(user_date + user_time);
-            FeelingRecord record = new FeelingRecord(feel, user_comment, datetime);
-
-            this.records.add(record);
-            this.saveArrayDate();
-
-
-            this.showFeelingListActivity();
-        }
-        catch (ParseException e) {
-            Toast.makeText(this, "Invalid Input ... Try Again (Check Date Input)", Toast.LENGTH_SHORT).show();
-        }
-
-        catch (CommentTooLongException e) {
-            Toast.makeText(this, "Invalid Input ... Comment Over 100 Chars ", Toast.LENGTH_SHORT).show();
-        }
-
     }
 
     public void submitAngerRecord(View view) {
