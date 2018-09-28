@@ -105,7 +105,7 @@ public abstract class PersistentFeelingRecordsActivity extends AppCompatActivity
             FileWriter writer = new FileWriter(records_file, false);
             Gson gson = new Gson();
 
-            writer.write(gson.toJson(this.records.toArray()).toString());
+            writer.write(gson.toJson(this.records.toArray()));
             writer.close();
         }
         catch (IOException e) {
