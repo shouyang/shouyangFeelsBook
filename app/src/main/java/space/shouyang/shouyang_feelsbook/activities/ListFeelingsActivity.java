@@ -121,7 +121,7 @@ public class ListFeelingsActivity extends PersistentFeelingRecordsActivity {
     /**
      *  Updates the counts of different emotions.
      */
-    private void updateCounts() {
+    public void updateCounts() {
 
         Map<Feel, Integer> counts_of = new HashMap<>();
 

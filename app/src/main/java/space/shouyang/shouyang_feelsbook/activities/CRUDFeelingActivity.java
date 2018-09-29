@@ -37,9 +37,9 @@ import space.shouyang.shouyang_feelsbook.models.FeelingRecord;
  */
 public abstract class CRUDFeelingActivity extends PersistentFeelingRecordsActivity {
 
-    EditText input_date;
-    EditText input_time;
-    EditText input_comment;
+    protected EditText input_date;
+    protected EditText input_time;
+    protected EditText input_comment;
 
     /**
      *  Binds the UI for FeelingRecords CRUD activities on create.
