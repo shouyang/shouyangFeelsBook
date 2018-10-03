@@ -17,3 +17,5 @@ Java GSON Examples
 https://www.mkyong.com/java/how-do-convert-java-object-to-from-json-format-gson-api/
 http://www.javacreed.com/simple-gson-example/
 
+How to handle ListView click in Android
+https://stackoverflow.com/questions/2468100/how-to-handle-listview-click-in-android
