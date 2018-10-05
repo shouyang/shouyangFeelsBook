@@ -4,6 +4,16 @@ CMPUT301 Assignment 1
 
 APK Location: Build/Outputs/apk/debug/app-debug.apk
 
+How to build:
+    * Open in Android Studio 3+
+    * Click Build
+    * Install build tools as prompted.
+
+Note: This app was tested  on the Pixel 2 XL emulator and my OnePlus 5t.
+There may be some layout concerns on smaller devices. For testing you may want to use
+the emulator for the Pixel 2 XL.
+
+
 
 ### Sources
 
